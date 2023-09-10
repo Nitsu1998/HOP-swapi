@@ -4,38 +4,53 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+use App\Exceptions\NotFoundException;
 
 class Vehicles extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name','model','vehicle_class','manufacturer','length','crew','cost_in_credits','passengers','max_atmosphering_speed','cargo_capacity','consumables','films','pilots','url','count'];
+    protected $fillable = ['name', 'model', 'vehicle_class', 'manufacturer', 'length', 'crew', 'cost_in_credits', 'passengers', 'max_atmosphering_speed', 'cargo_capacity', 'consumables', 'films', 'pilots', 'url', 'count'];
 
-    protected $casts = ['films' => 'json','pilots' => 'json'];
+    protected $casts = ['films' => 'json', 'pilots' => 'json'];
 
-    public function getById($id)
+    public function getAllVehicles()
     {
-        return Vehicles::findOrFail($id);
+        return Vehicles::all();
     }
 
-    public function setCount($id, $count)
+    public function getVehicleById($id)
     {
-        $starship = $this->getById($id);
-        $starship->count = $count;
-        $starship->save();
+        try {
+            return Vehicles::findOrFail($id);
+        } catch (ModelNotFoundException) {
+            throw new NotFoundException("Vehicle with ID ". $id ." not found");
+        }
     }
 
-    public function incrementCount($id, $amount)
+    public function setVehicleCount($id, $amount)
     {
-        $starship = $this->getById($id);
-        $starship->count += $amount;
-        $starship->save();
+        $vehicle = $this->getVehicleById($id);
+        $vehicle->count = $amount;
+        $vehicle->save();
     }
 
-    public function decrementCount($id, $amount)
+    public function incrementVehicleCount($id, $amount)
     {
-        $starship = $this->getById($id);
-        $starship->count -= $amount;
-        $starship->save();
+        $vehicle = $this->getVehicleById($id);
+        $vehicle->count += $amount;
+        $vehicle->save();
+    }
+
+    public function decrementVehicleCount($id, $amount)
+    {
+        $vehicle = $this->getVehicleById($id);
+        if ($amount >= $vehicle->count) {
+            $vehicle->count = 0;
+        } else {
+            $vehicle->count -= $amount;
+        }
+        $vehicle->save();
     }
 }

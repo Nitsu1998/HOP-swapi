@@ -60,8 +60,7 @@ return new class extends Migration
                     'pilots' => json_encode($starship['pilots']), 
                     'url' => $starship['url'],
                     'created_at' => Carbon::parse($starship['created']),
-                    'updated_at' => Carbon::parse($starship['edited']),
-                    'count' => 0, 
+                    'updated_at' => Carbon::parse($starship['edited'])
                 ]);
             }
             $api_url = $data['next'];

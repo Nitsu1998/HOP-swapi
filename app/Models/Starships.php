@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+use App\Exceptions\NotFoundException;
 
 class Starships extends Model
 {
@@ -13,29 +15,42 @@ class Starships extends Model
 
     protected $casts = ['films' => 'json', 'pilots' => 'json'];
 
-    public function getById($id)
+    public function getAllStarships()
     {
-        return Starships::findOrFail($id);
+        return Starships::all();
     }
 
-    public function setCount($id, $count)
+    public function getStarshipById($id)
     {
-        $starship = $this->getById($id);
-        $starship->count = $count;
+        try {
+            return Starships::findOrFail($id);
+        } catch (ModelNotFoundException) {
+            throw new NotFoundException("Starship with ID ". $id ." not found");
+        }
+    }
+
+    public function setStarshipCount($id, $amount)
+    {
+        $starship = $this->getStarshipById($id);
+        $starship->count = $amount;
         $starship->save();
     }
 
-    public function incrementCount($id, $amount)
+    public function incrementStarshipCount($id, $amount)
     {
-        $starship = $this->getById($id);
+        $starship = $this->getStarshipById($id);
         $starship->count += $amount;
         $starship->save();
     }
 
-    public function decrementCount($id, $amount)
+    public function decrementStarshipCount($id, $amount)
     {
-        $starship = $this->getById($id);
-        $starship->count -= $amount;
+        $starship = $this->getStarshipById($id);
+        if ($amount >= $starship->count) {
+            $starship->count = 0;
+        } else {
+            $starship->count -= $amount;
+        }
         $starship->save();
     }
 }

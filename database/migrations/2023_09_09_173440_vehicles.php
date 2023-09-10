@@ -56,8 +56,7 @@ return new class extends Migration
                     'pilots' => json_encode($vehicle['pilots']), 
                     'url' => $vehicle['url'],
                     'created_at' => Carbon::parse($vehicle['created']),
-                    'updated_at' => Carbon::parse($vehicle['edited']),
-                    'count' => 0, 
+                    'updated_at' => Carbon::parse($vehicle['edited'])
                 ]);
             }
             $api_url = $data['next'];
