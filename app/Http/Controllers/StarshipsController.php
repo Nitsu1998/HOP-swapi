@@ -5,14 +5,20 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Starships;
 use App\Exceptions\NotFoundException;
+use Illuminate\Support\Facades\Validator;
 
 
 class StarshipsController extends Controller
 {
     private function validateRequestData($request)
     {
-        $rules = ['amount' => 'required|integer|min:0'];
-        return $this->validate($request, $rules);
+        $validator = Validator::make($request->all(), [
+            'amount' => 'required|integer|min:0',
+        ]);
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()], 422);
+        }
+        return;
     }
 
     public function index(Starships $starships)
@@ -34,7 +40,10 @@ class StarshipsController extends Controller
     public function updateCount($id, Starships $starships, Request $request)
     {
         try {
-            $this->validateRequestData($request);
+            $validation = $this->validateRequestData($request);
+            if ($validation) {
+                return $validation;
+            }
             $amount = $request->input('amount');
             $starships->setStarshipCount($id, $amount);
             return response()->json(['starship_id' => $id, 'message' => 'Count updated successfully']);
@@ -46,7 +55,10 @@ class StarshipsController extends Controller
     public function incrementCount($id, Starships $starships, Request $request)
     {
         try {
-            $this->validateRequestData($request);
+            $validation = $this->validateRequestData($request);
+            if ($validation) {
+                return $validation;
+            }
             $amount = $request->input('amount');
             $starships->incrementStarshipCount($id, $amount);
             return response()->json(['starship_id' => $id, 'message' => 'Count incremented successfully']);
@@ -58,7 +70,10 @@ class StarshipsController extends Controller
     public function decrementCount($id, Starships $starships, Request $request)
     {
         try {
-            $this->validateRequestData($request);
+            $validation = $this->validateRequestData($request);
+            if ($validation) {
+                return $validation;
+            }
             $amount = $request->input('amount');
             $starships->decrementStarshipCount($id, $amount);
             return response()->json(['starship_id' => $id, 'message' => 'Count decremented successfully']);

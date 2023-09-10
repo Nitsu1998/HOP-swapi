@@ -5,13 +5,19 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Vehicles;
 use App\Exceptions\NotFoundException;
+use Illuminate\Support\Facades\Validator;
 
 class VehiclesController extends Controller
 {
     private function validateRequestData($request)
     {
-        $rules = ['amount' => 'required|integer|min:0'];
-        $this->validate($request, $rules);
+        $validator = Validator::make($request->all(), [
+            'amount' => 'required|integer|min:0',
+        ]);
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()], 422);
+        }
+        return;
     }
 
     public function index(Vehicles $vehicles)
@@ -33,7 +39,10 @@ class VehiclesController extends Controller
     public function updateCount($id, Vehicles $vehicles, Request $request)
     {
         try {
-            $this->validateRequestData($request);
+            $validation = $this->validateRequestData($request);
+            if ($validation) {
+                return $validation;
+            }
             $amount = $request->input('amount');
             $vehicles->setVehicleCount($id, $amount);
             return response()->json(['vehicle_id' => $id, 'message' => 'Count updated successfully']);
@@ -45,7 +54,10 @@ class VehiclesController extends Controller
     public function incrementCount($id, Vehicles $vehicles, Request $request)
     {
         try {
-            $this->validateRequestData($request);
+            $validation = $this->validateRequestData($request);
+            if ($validation) {
+                return $validation;
+            }
             $amount = $request->input('amount');
             $vehicles->incrementVehicleCount($id, $amount);
             return response()->json(['vehicle_id' => $id, 'message' => 'Count updated successfully']);
@@ -57,7 +69,10 @@ class VehiclesController extends Controller
     public function decrementCount($id, Vehicles $vehicles, Request $request)
     {
         try {
-            $this->validateRequestData($request);
+            $validation = $this->validateRequestData($request);
+            if ($validation) {
+                return $validation;
+            }
             $amount = $request->input('amount');
             $vehicles->decrementVehicleCount($id, $amount);
             return response()->json(['vehicle_id' => $id, 'message' => 'Count updated successfully']);
