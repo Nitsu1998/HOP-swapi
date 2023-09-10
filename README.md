@@ -8,13 +8,14 @@ El siguiente proyecto es una extension de la API SWAPI para controlar el inventa
 * Validacion de datos en la *request* como tambien *excepciones* para la busqueda por ID.
 * Documentacion de rutas con sus especificaciones y caracteristicas accediendo a "/api/documentation" una vez levantado el proyecto.
 
-## Libreria:
-
-* Se utilizo *l5-swagger* para la redaccion de la documentacion. 
-
 ## Instrucciones para levantar proyecto:
 
 * Clonar el proyecto con git clone https://github.com/Nitsu1998/HOP-swapi.git
 * Craer base de datos y configurar .env, solamente sera necesario poner el nombre de la base de datos en el caso de ser local.
 * Correr las migraciones con *php artisan migrate*, tener en cuenta que cargara de la API SWAPI todos los *starships* y *vehicles*.
 * Levantar el proyecto con *php artisan serve*
+
+## Libreria:
+
+* Se utilizo *l5-swagger* para la redaccion de la documentacion. 
+
