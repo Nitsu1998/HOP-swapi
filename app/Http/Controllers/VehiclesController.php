@@ -9,6 +9,14 @@ use Illuminate\Support\Facades\Validator;
 
 class VehiclesController extends Controller
 {
+
+    protected $vehicles;
+
+    public function __construct(Vehicles $vehicles)
+    {
+        $this->vehicles = $vehicles;
+    }
+
     private function validateRequestData($request)
     {
         $validator = Validator::make($request->all(), [
@@ -20,23 +28,86 @@ class VehiclesController extends Controller
         return;
     }
 
-    public function index(Vehicles $vehicles)
+    /**
+     * @OA\Get(
+     *     path="/api/vehicles",
+     *     summary="Show vehicles",
+     *     @OA\Response(
+     *         response=200,
+     *         description="Show all vechiles."
+     *     ),
+     *     @OA\Response(
+     *         response="default",
+     *         description="An error happend."
+     *     )
+     * )
+     */
+    public function index()
     {
-        $response = $vehicles->getAllVehicles();
-        return response()->json($response);
+        $vehicles = $this->vehicles->getAllItems();
+        return response()->json($vehicles);
     }
 
-    public function show($id, Vehicles $vehicles)
+    /**
+     * @OA\Get(
+     *     path="/api/vehicles/{id}",
+     *     summary="Show a vehicle",
+     *      @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         description="ID vehicle",
+     *         required=true,
+     *         @OA\Schema(type="integer")
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Show a vehicle by ID."
+     *     ),
+     *     @OA\Response(
+     *         response="default",
+     *         description="An error happend."
+     *     )
+     * )
+     */
+    public function show($id)
     {
         try {
-            $response = $vehicles->getVehicleById($id);
-            return response()->json($response);
+            $vehicle = $this->vehicles->getItemById($id);
+            return response()->json($vehicle);
         } catch (NotFoundException $e) {
             return response()->json(['error' => $e->getMessage()], 404);
         }
     }
 
-    public function updateCount($id, Vehicles $vehicles, Request $request)
+    /**
+     * @OA\Put(
+     *     path="/api/vehicles/{id}/updateCount",
+     *     summary="Update inventory vehicle",
+     *      @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         description="ID vehicle",
+     *         required=true,
+     *         @OA\Schema(type="integer")
+     *     ),
+     *      @OA\RequestBody(
+     *         required=true,
+     *         @OA\JsonContent(
+     *             type="object",
+     *             @OA\Property(property="amount", type="integer")
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Update inventary of a vehicle by ID."
+     *     ),
+     *     @OA\Response(
+     *         response="default",
+     *         description="An error happend."
+     *     )
+     * )
+     */
+    public function updateCount($id, Request $request)
     {
         try {
             $validation = $this->validateRequestData($request);
@@ -44,14 +115,42 @@ class VehiclesController extends Controller
                 return $validation;
             }
             $amount = $request->input('amount');
-            $vehicles->setVehicleCount($id, $amount);
+            $this->vehicles->setItemCount($id, $amount);
             return response()->json(['vehicle_id' => $id, 'message' => 'Count updated successfully']);
         } catch (NotFoundException $e) {
             return response()->json(['error' => $e->getMessage()], 404);
         }
     }
 
-    public function incrementCount($id, Vehicles $vehicles, Request $request)
+    /**
+     * @OA\Put(
+     *     path="/api/vehicles/{id}/incrementCount",
+     *     summary="Increment inventory vehicle",
+     * @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         description="ID vehicle",
+     *         required=true,
+     *         @OA\Schema(type="integer")
+     *     ),
+     *      @OA\RequestBody(
+     *         required=true,
+     *         @OA\JsonContent(
+     *             type="object",
+     *             @OA\Property(property="amount", type="integer")
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Increment inventary of a vehicle by ID."
+     *     ),
+     *     @OA\Response(
+     *         response="default",
+     *         description="An error happend."
+     *     )
+     * )
+     */
+    public function incrementCount($id, Request $request)
     {
         try {
             $validation = $this->validateRequestData($request);
@@ -59,14 +158,42 @@ class VehiclesController extends Controller
                 return $validation;
             }
             $amount = $request->input('amount');
-            $vehicles->incrementVehicleCount($id, $amount);
+            $this->vehicles->incrementItemCount($id, $amount);
             return response()->json(['vehicle_id' => $id, 'message' => 'Count updated successfully']);
         } catch (NotFoundException $e) {
             return response()->json(['error' => $e->getMessage()], 404);
         }
     }
 
-    public function decrementCount($id, Vehicles $vehicles, Request $request)
+    /**
+     * @OA\Put(
+     *     path="/api/vehicles/{id}/decrementCount",
+     *     summary="Decrement inventory vehicle",
+     *      @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         description="ID vehicle",
+     *         required=true,
+     *         @OA\Schema(type="integer")
+     *     ),
+     *      @OA\RequestBody(
+     *         required=true,
+     *         @OA\JsonContent(
+     *             type="object",
+     *             @OA\Property(property="amount", type="integer")
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Decrement inventary of a vehicle by ID."
+     *     ),
+     *     @OA\Response(
+     *         response="default",
+     *         description="An error happend."
+     *     )
+     * )
+     */
+    public function decrementCount($id, Request $request)
     {
         try {
             $validation = $this->validateRequestData($request);
@@ -74,7 +201,7 @@ class VehiclesController extends Controller
                 return $validation;
             }
             $amount = $request->input('amount');
-            $vehicles->decrementVehicleCount($id, $amount);
+            $this->vehicles->decrementItemCount($id, $amount);
             return response()->json(['vehicle_id' => $id, 'message' => 'Count updated successfully']);
         } catch (NotFoundException $e) {
             return response()->json(['error' => $e->getMessage()], 404);

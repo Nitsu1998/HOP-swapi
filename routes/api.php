@@ -34,3 +34,14 @@ Route::put('vehicles/{id}/updateCount', [VehiclesController::class, 'updateCount
 Route::put('vehicles/{id}/incrementCount', [VehiclesController::class, 'incrementCount']);
 Route::put('vehicles/{id}/decrementCount', [VehiclesController::class, 'decrementCount']);
 
+/**
+ * @OA\Get(
+ *     path="/starships",
+ *     summary="Obtener lista de naves espaciales",
+ *     tags={"Starships"},
+ *     @OA\Response(
+ *         response=200,
+ *         description="Lista de naves espaciales",
+ *     ),
+ * )
+ */

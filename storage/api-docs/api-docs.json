@@ -1,0 +1,328 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "API starships and vehicles",
+        "description": "API for handle inventory of Starships and Vehicles",
+        "version": "1.0"
+    },
+    "paths": {
+        "/api/starships": {
+            "get": {
+                "summary": "Show starships",
+                "operationId": "bf1777414118d7f5886cb5436cf9fd73",
+                "responses": {
+                    "200": {
+                        "description": "Show all starships."
+                    },
+                    "default": {
+                        "description": "An error happend."
+                    }
+                }
+            }
+        },
+        "/api/starships/{id}": {
+            "get": {
+                "summary": "Show a starship",
+                "operationId": "e21b659de07137177327fad54595505d",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID starship",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Show a starship by ID."
+                    },
+                    "default": {
+                        "description": "An error happend."
+                    }
+                }
+            }
+        },
+        "/api/starships/{id}/updateCount": {
+            "put": {
+                "summary": "Update inventory starship",
+                "operationId": "309262627d1a3a157033f5af6844d452",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID starship",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "amount": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Update inventary of a starship by ID."
+                    },
+                    "default": {
+                        "description": "An error happend."
+                    }
+                }
+            }
+        },
+        "/api/starships/{id}/incrementCount": {
+            "put": {
+                "summary": "Increment inventory starship",
+                "operationId": "040ccbe3e93e01777a6414dd04078f03",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID starship",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "amount": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Increment inventary of a starship by ID."
+                    },
+                    "default": {
+                        "description": "An error happend."
+                    }
+                }
+            }
+        },
+        "/api/starships/{id}/decrementCount": {
+            "put": {
+                "summary": "Decrement inventory starship",
+                "operationId": "05bdc082694e187c9b3b448dd7756334",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID starship",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "amount": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Decrement inventary of a starship by ID."
+                    },
+                    "default": {
+                        "description": "An error happend."
+                    }
+                }
+            }
+        },
+        "/api/vehicles": {
+            "get": {
+                "summary": "Show vehicles",
+                "operationId": "797662aa608e954ad57b19b08e10da65",
+                "responses": {
+                    "200": {
+                        "description": "Show all vechiles."
+                    },
+                    "default": {
+                        "description": "An error happend."
+                    }
+                }
+            }
+        },
+        "/api/vehicles/{id}": {
+            "get": {
+                "summary": "Show a vehicle",
+                "operationId": "bb69aea18a4cca206f51c4081544453e",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID vehicle",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Show a vehicle by ID."
+                    },
+                    "default": {
+                        "description": "An error happend."
+                    }
+                }
+            }
+        },
+        "/api/vehicles/{id}/updateCount": {
+            "put": {
+                "summary": "Update inventory vehicle",
+                "operationId": "3684d8b69468e8b535f45ad85697901d",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID vehicle",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "amount": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Update inventary of a vehicle by ID."
+                    },
+                    "default": {
+                        "description": "An error happend."
+                    }
+                }
+            }
+        },
+        "/api/vehicles/{id}/incrementCount": {
+            "put": {
+                "summary": "Increment inventory vehicle",
+                "operationId": "d1cdda7ee66b65df1d55fee12f86f652",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID vehicle",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "amount": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Increment inventary of a vehicle by ID."
+                    },
+                    "default": {
+                        "description": "An error happend."
+                    }
+                }
+            }
+        },
+        "/api/vehicles/{id}/decrementCount": {
+            "put": {
+                "summary": "Decrement inventory vehicle",
+                "operationId": "490ba4f8c6d5bdeea3372a5324aef2e7",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID vehicle",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "amount": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Decrement inventary of a vehicle by ID."
+                    },
+                    "default": {
+                        "description": "An error happend."
+                    }
+                }
+            }
+        }
+    }
+}
