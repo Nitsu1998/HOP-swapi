@@ -7,6 +7,7 @@ use App\Exceptions\NotFoundException;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Starships;
 
+
 class StarshipsController extends Controller
 {
     protected $starships;
@@ -31,6 +32,7 @@ class StarshipsController extends Controller
      * @OA\Get(
      *     path="/api/starships",
      *     summary="Show starships",
+     *     tags={"Starships"},
      *     @OA\Response(
      *         response=200,
      *         description="Show all starships."
@@ -51,7 +53,8 @@ class StarshipsController extends Controller
      * @OA\Get(
      *     path="/api/starships/{id}",
      *     summary="Show a starship",
-     *      @OA\Parameter(
+     *     tags={"Starships"},
+     *     @OA\Parameter(
      *         name="id",
      *         in="path",
      *         description="ID starship",
@@ -82,7 +85,8 @@ class StarshipsController extends Controller
      * @OA\Put(
      *     path="/api/starships/{id}/updateCount",
      *     summary="Update inventory starship",
-     *      @OA\Parameter(
+     *     tags={"Starships"},
+     *     @OA\Parameter(
      *         name="id",
      *         in="path",
      *         description="ID starship",
@@ -125,7 +129,8 @@ class StarshipsController extends Controller
      * @OA\Put(
      *     path="/api/starships/{id}/incrementCount",
      *     summary="Increment inventory starship",
-     *      @OA\Parameter(
+     *     tags={"Starships"},
+     *     @OA\Parameter(
      *         name="id",
      *         in="path",
      *         description="ID starship",
@@ -168,7 +173,8 @@ class StarshipsController extends Controller
      * @OA\Put(
      *     path="/api/starships/{id}/decrementCount",
      *     summary="Decrement inventory starship",
-     *      @OA\Parameter(
+     *     tags={"Starships"},
+     *     @OA\Parameter(
      *         name="id",
      *         in="path",
      *         description="ID starship",

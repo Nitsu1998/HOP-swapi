@@ -8,6 +8,9 @@
     "paths": {
         "/api/starships": {
             "get": {
+                "tags": [
+                    "Starships"
+                ],
                 "summary": "Show starships",
                 "operationId": "bf1777414118d7f5886cb5436cf9fd73",
                 "responses": {
@@ -22,6 +25,9 @@
         },
         "/api/starships/{id}": {
             "get": {
+                "tags": [
+                    "Starships"
+                ],
                 "summary": "Show a starship",
                 "operationId": "e21b659de07137177327fad54595505d",
                 "parameters": [
@@ -47,6 +53,9 @@
         },
         "/api/starships/{id}/updateCount": {
             "put": {
+                "tags": [
+                    "Starships"
+                ],
                 "summary": "Update inventory starship",
                 "operationId": "309262627d1a3a157033f5af6844d452",
                 "parameters": [
@@ -87,6 +96,9 @@
         },
         "/api/starships/{id}/incrementCount": {
             "put": {
+                "tags": [
+                    "Starships"
+                ],
                 "summary": "Increment inventory starship",
                 "operationId": "040ccbe3e93e01777a6414dd04078f03",
                 "parameters": [
@@ -127,6 +139,9 @@
         },
         "/api/starships/{id}/decrementCount": {
             "put": {
+                "tags": [
+                    "Starships"
+                ],
                 "summary": "Decrement inventory starship",
                 "operationId": "05bdc082694e187c9b3b448dd7756334",
                 "parameters": [
@@ -167,6 +182,9 @@
         },
         "/api/vehicles": {
             "get": {
+                "tags": [
+                    "Vehicles"
+                ],
                 "summary": "Show vehicles",
                 "operationId": "797662aa608e954ad57b19b08e10da65",
                 "responses": {
@@ -181,6 +199,9 @@
         },
         "/api/vehicles/{id}": {
             "get": {
+                "tags": [
+                    "Vehicles"
+                ],
                 "summary": "Show a vehicle",
                 "operationId": "bb69aea18a4cca206f51c4081544453e",
                 "parameters": [
@@ -206,6 +227,9 @@
         },
         "/api/vehicles/{id}/updateCount": {
             "put": {
+                "tags": [
+                    "Vehicles"
+                ],
                 "summary": "Update inventory vehicle",
                 "operationId": "3684d8b69468e8b535f45ad85697901d",
                 "parameters": [
@@ -246,6 +270,9 @@
         },
         "/api/vehicles/{id}/incrementCount": {
             "put": {
+                "tags": [
+                    "Vehicles"
+                ],
                 "summary": "Increment inventory vehicle",
                 "operationId": "d1cdda7ee66b65df1d55fee12f86f652",
                 "parameters": [
@@ -286,6 +313,9 @@
         },
         "/api/vehicles/{id}/decrementCount": {
             "put": {
+                "tags": [
+                    "Vehicles"
+                ],
                 "summary": "Decrement inventory vehicle",
                 "operationId": "490ba4f8c6d5bdeea3372a5324aef2e7",
                 "parameters": [
@@ -324,5 +354,15 @@
                 }
             }
         }
-    }
+    },
+    "tags": [
+        {
+            "name": "Vehicles",
+            "description": "Endpoints related to vehicle operations"
+        },
+        {
+            "name": "Starships",
+            "description": "Endpoints related to starship operations"
+        }
+    ]
 }

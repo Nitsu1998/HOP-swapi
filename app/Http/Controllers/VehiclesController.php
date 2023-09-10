@@ -32,6 +32,7 @@ class VehiclesController extends Controller
      * @OA\Get(
      *     path="/api/vehicles",
      *     summary="Show vehicles",
+     *     tags={"Vehicles"},
      *     @OA\Response(
      *         response=200,
      *         description="Show all vechiles."
@@ -52,7 +53,8 @@ class VehiclesController extends Controller
      * @OA\Get(
      *     path="/api/vehicles/{id}",
      *     summary="Show a vehicle",
-     *      @OA\Parameter(
+     *     tags={"Vehicles"},
+     *     @OA\Parameter(
      *         name="id",
      *         in="path",
      *         description="ID vehicle",
@@ -83,7 +85,8 @@ class VehiclesController extends Controller
      * @OA\Put(
      *     path="/api/vehicles/{id}/updateCount",
      *     summary="Update inventory vehicle",
-     *      @OA\Parameter(
+     *     tags={"Vehicles"},
+     *     @OA\Parameter(
      *         name="id",
      *         in="path",
      *         description="ID vehicle",
@@ -126,7 +129,8 @@ class VehiclesController extends Controller
      * @OA\Put(
      *     path="/api/vehicles/{id}/incrementCount",
      *     summary="Increment inventory vehicle",
-     * @OA\Parameter(
+     *     tags={"Vehicles"},
+     *     @OA\Parameter(
      *         name="id",
      *         in="path",
      *         description="ID vehicle",
@@ -169,7 +173,8 @@ class VehiclesController extends Controller
      * @OA\Put(
      *     path="/api/vehicles/{id}/decrementCount",
      *     summary="Decrement inventory vehicle",
-     *      @OA\Parameter(
+     *     tags={"Vehicles"},
+     *     @OA\Parameter(
      *         name="id",
      *         in="path",
      *         description="ID vehicle",
